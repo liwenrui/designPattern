@@ -25,8 +25,12 @@ class Singleton{
      * 获取实例
      */
     public static function getInstance(){
-        if (!self::$_instance instanceof self) {
-          self::$_instance = new self;
+        if(self::$_instance == null){                           //Single Checked
+            //synchronized (Singleton.class){                   //java的多线程同步锁
+                if (!self::$_instance instanceof self) {        //Double Checked
+                  self::$_instance = new self;
+                }
+            //}
         }
         return self::$_instance;
     }
